@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workspace Staff Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+</head>
+
+<body>
+    <section id="section">
+        <div id="blur" class="blur">
+        </div>
+        <div id="form" class="formblur">
+            <div class="form">
+                <i id="ri-close-line" class="ri-close-line"></i>
+                <h1>Ajouter Un Nouveau Employé</h1>
+                <form class="form-in" action="">
+                    <div class="form-flex">
+                        <input id="nom" class="form-input" placeholder="Nom" type="text">
+                        <select class="form-input" name="Role" id="role">
+                            <option class="form-option" value="" selected disabled hidden>Choise Un Role</option>
+                            <option class="form-option" value="receptionniste">Réceptionniste</option>
+                            <option class="form-option" value="technicien IT">Technicien IT</option>
+                            <option class="form-option" value="agent De Securite">Agent de sécurité</option>
+                            <option class="form-option" value="manager">Manager</option>
+                            <option class="form-option" value="nettoyage">Nettoyage </option>
+                            <option class="form-option" value="autres Roles">Autres rôles</option>
+                        </select>
+                    </div>
+                    <input id="phone" class="form-input" placeholder="Telephone" type="text">
+                    <input id="photo" class="form-input" placeholder="Photo Url" type="text">
+                    <input id="email" class="form-input" placeholder="Email" type="text">
+                    <div id="form-exp" class="form-exp">
+                        <h3>Expériences professionnelles</h3>
+                    </div>
+                    <div class="form-flex">
+                        <div class="button-style vert" id="add-exp">+ Ajouter Expériences </div>
+                        <button class="button-style vert" id="save">Sauvegarde</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <div id="sidebar">
+            <div class="sidebar-head">
+                <h2 class="sidebar-h2">
+                    Unassigned Staff
+                </h2>
+                <button class="button-style vert" id="sidebar-button">
+                    <span class="plus">+</span>
+                    Add New Worker
+                </button>
+            </div>
+            <div id="sidebar-body" class="sidebar-body">
+            </div>
+        </div>
+        <div id="plan">
+            <h1 class="plan-h1">Floor Plan</h1>
+            <div class="zones">
+                <div class="row2">
+                    <div id="salle-de-conferance">
+                        <div class="salle-inside">
+                            <p class="salle-title">
+                                salle de conferance
+                            </p>
+                            <button class="icon-btn" data-salle="conferance" title="Add New" aria-label="Add new item"
+                                type="button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="img">
+                                    <path class="icon-path-circle"
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                    </path>
+                                    <path class="icon-path-line" d="M8 12H16"></path>
+                                    <path class="icon-path-line" d="M12 16V8"></path>
+                                </svg>
+                            </button>
+
+                            <div class="salle-employe">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="salle1"><img class="salle1" src="img/plan7.jpg" alt=""></div>
+                    <div id="salle-de-serveurs">
+                        <div class="salle-inside">
+                            <p class="salle-title">
+                                salle de serveurs
+                            </p>
+                            <button class="icon-btn" data-salle="serveurs" title="Add New" aria-label="Add new item"
+                                type="button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="img">
+                                    <path class="icon-path-circle"
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                    </path>
+                                    <path class="icon-path-line" d="M8 12H16"></path>
+                                    <path class="icon-path-line" d="M12 16V8"></path>
+                                </svg>
+                            </button>
+
+                            <div class="salle-employe">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="salle-de-securite">
+                        <div class="salle-inside">
+                            <p class="salle-title">
+                                salle de securite
+                            </p>
+                            <button class="icon-btn" data-salle="securite" title="Add New" aria-label="Add new item"
+                                type="button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="img">
+                                    <path class="icon-path-circle"
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                    </path>
+                                    <path class="icon-path-line" d="M8 12H16"></path>
+                                    <path class="icon-path-line" d="M12 16V8"></path>
+                                </svg>
+                            </button>
+
+                            <div class="salle-employe">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="salle-de-reception">
+                        <div class="salle-inside">
+                            <p class="salle-title">
+                                salle de reception
+                            </p>
+                            <button class="icon-btn" data-salle="reception" title="Add New" aria-label="Add new item"
+                                type="button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="img">
+                                    <path class="icon-path-circle"
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                    </path>
+                                    <path class="icon-path-line" d="M8 12H16"></path>
+                                    <path class="icon-path-line" d="M12 16V8"></path>
+                                </svg>
+                            </button>
+
+                            <div class="salle-employe">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="salle2"><img class="salle2" src="img/plan8.jpg" alt=""></div>
+                    <div id="salle3"><img class="salle3" src="img/plan9.jpg" alt=""></div>
+                    <div id="salle-de-personnel">
+                        <div class="salle-inside">
+                            <p class="salle-title">
+                                salle de personnel
+                            </p>
+                            <button class="icon-btn" data-salle="personnel" title="Add New" aria-label="Add new item"
+                                type="button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="img">
+                                    <path class="icon-path-circle"
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                    </path>
+                                    <path class="icon-path-line" d="M8 12H16"></path>
+                                    <path class="icon-path-line" d="M12 16V8"></path>
+                                </svg>
+                            </button>
+
+                            <div class="salle-employe">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="salle-de-archives">
+                        <div class="salle-inside">
+                            <p class="salle-title">
+                                salle d'archives
+                            </p>
+                            <button class="icon-btn" data-salle="archives" title="Add New" aria-label="Add new item"
+                                type="button">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                    role="img">
+                                    <path class="icon-path-circle"
+                                        d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                    </path>
+                                    <path class="icon-path-line" d="M8 12H16"></path>
+                                    <path class="icon-path-line" d="M12 16V8"></path>
+                                </svg>
+                            </button>
+
+                            <div class="salle-employe">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+    <script src="script.js"></script>
+</body>
+
+</html>

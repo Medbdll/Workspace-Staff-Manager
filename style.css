@@ -1,0 +1,576 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+}
+
+:root {
+    --teal-500: oklch(73.467% 0.15148 241.457);
+    --teal-800: oklch(0% 0 0);
+    --btn-size: 64px;
+    --svg-size: 50px;
+    --transition-time: 300ms;
+}
+
+#section {
+    display: flex;
+    flex: 4;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*side bar for adding new worker and display unassigned staff*/
+#sidebar {
+    flex: 1;
+    padding: 30px 20px;
+}
+
+.sidebar-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+}
+
+.sidebar-h2 {
+    color: black;
+    font-weight: bold;
+    text-shadow: 0px 1px 1px rgb(0 0 0 / 0.1);
+}
+
+.plus {
+    font-size: x-large;
+    margin-right: 5px;
+}
+
+/*unassigned staf display*/
+.sidebar-body {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.div-em {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px rgb(221, 221, 221);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    margin-bottom: 10px;
+}
+
+.div-In {
+    display: grid;
+}
+
+.div-em:hover {
+    background-color: azure;
+    cursor: pointer;
+}
+
+.div-em:hover .p-em {
+    color: rgb(151, 151, 151);
+}
+
+.div-em:hover .p-role {
+    color: rgb(0, 0, 0);
+}
+
+.div-em i {
+    color: rgb(151, 151, 151);
+}
+
+.div-em i:hover {
+    color: rgb(255, 0, 0);
+}
+
+.img-em {
+    width: 40px;
+    border-radius: 100%;
+    height: 40px;
+}
+
+.p-em {
+    color: black;
+    font-size: small;
+}
+
+.p-role {
+    color: rgb(106, 106, 106);
+    font-size: 12px;
+}
+
+.p-em2 {
+    color: rgb(255, 0, 0);
+    font-size: small;
+}
+
+.p-role2 {
+    color: rgb(106, 106, 106);
+    font-size: 12px;
+}
+
+/* form to adding new worker information */
+.formblur {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.335);
+    z-index: 100;
+    display: none;
+}
+
+.form {
+    width: 50%;
+    height: 80%;
+    background-color: oklch(96.7% 0.003 264.542);
+    border-radius: 10px;
+    display: grid;
+    justify-items: center;
+    position: relative;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.ri-close-line {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ri-close-line:hover {
+    color: red;
+    transform: scale(1.2);
+}
+
+.form h1 {
+    grid-row: 1/2;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: oklch(74.6% 0.16 232.661);
+    text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.434);
+
+}
+
+.form-in {
+    grid-row: 2/5;
+    display: flex;
+    flex-direction: column;
+    color: aliceblue;
+    width: 60%;
+    gap: 10px;
+}
+
+.form-flex {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.form-flex .form-input {
+    width: 50%;
+}
+
+.form-option {
+    border: solid 1px red;
+}
+
+.form-input {
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 10px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.button-style {
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    font-size: 16px;
+    border: none;
+    padding: 10px 10px;
+    width: max-content;
+    height: fit-content;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.form-exp {
+    width: 100%;
+    height: 100px;
+    overflow-y: scroll;
+    margin: 20px 0px;
+}
+
+.divFormExp:last-child {
+    border: none;
+}
+
+.form-exp h3 {
+    color: black;
+}
+
+.form-exp::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.form-exp::-webkit-scrollbar-thumb {
+    background: oklch(72.3% 0.219 149.579);
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.form-exp::-webkit-scrollbar-thumb:hover {
+    background: oklch(72.3% 0.219 149.579);
+}
+
+.form-exp::-webkit-scrollbar {
+    width: 10px;
+}
+
+.ri-close-circle-fill {
+    position: absolute;
+    right: 10px;
+    color: black;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ri-close-circle-fill:hover {
+
+    color: red;
+    transform: scale(1.2);
+}
+
+.divFormExp {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    gap: 10px;
+    position: relative;
+    border-bottom: solid 1px rgb(203, 203, 203);
+    width: 100%;
+    padding: 20px 0px;
+}
+
+.button-style:hover {
+    background-color: oklch(100% 0.00011 271.152);
+    color: black;
+}
+
+.rouge {
+    background-color: red;
+}
+
+.vert {
+    background-color: oklch(72.3% 0.219 149.579);
+}
+
+/* plan side  */
+#plan {
+    flex: 3;
+    background-color: rgb(228, 228, 228);
+    display: grid;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.plan-h1 {
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 100;
+
+}
+
+.zones {
+    border-radius: 10px;
+    width: 80%;
+    height: 80%;
+    grid-row: 2/7;
+    display: grid;
+}
+
+.row2 {
+    height: 50%;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(3, auto);
+}
+
+#salle-de-conferance {
+    background: url(img/plan1.jpg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    grid-row: 1/2;
+    grid-column: 1/2;
+    height: 150px;
+    width: 298px;
+
+}
+
+
+#salle-de-serveurs {
+    background: url(img/plan3.jpg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    grid-row: 1/2;
+    grid-column: 3/4;
+    height: 150px;
+    width: 171px;
+
+}
+
+#salle-de-securite {
+    background: url(img/plan4.jpg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    grid-row: 1/2;
+    grid-column: 4/5;
+    height: 150px;
+    width: 167px;
+
+}
+
+#salle-de-reception {
+    background: url(img/plan2.jpg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    grid-row: 2/4;
+    grid-column: 1/2;
+    width: 297px;
+    height: 290px;
+}
+
+#salle-de-personnel {
+    background: url(img/plan5.jpg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 100px;
+    height: 150px;
+    width: 171px;
+}
+
+#salle-de-archives {
+    background: url(img/plan6.jpg) no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 150px;
+    width: 167px;
+
+}
+
+#salle1 {
+    height: 150px;
+    width: 112px;
+    grid-row: 1/2;
+    grid-column: 2/3;
+}
+
+#salle2 {
+    height: 139px;
+    width: 450px;
+    grid-column: 2/5;
+}
+
+#salle3 {
+    height: 150px;
+    width: 112px;
+}
+
+.salle1,
+.salle3 {
+    height: 150px;
+}
+
+.salle2 {
+    height: 139px;
+    width: 450px;
+}
+
+.salle-inside {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.salle-title {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    padding-top: 15px;
+    color: rgb(0, 0, 0);
+}
+
+.salle-employe {
+    width: 94%;
+    height: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+}
+
+.icon-btn {
+    position: relative;
+    --rotate: 0deg;
+    width: var(--btn-size);
+    height: var(--btn-size);
+    display: inline-grid;
+    place-items: center;
+    border-radius: 9999px;
+    background: transparent;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    transition: transform var(--transition-time) ease, background-color var(--transition-time) ease;
+    transform: rotate(var(--rotate));
+}
+
+.icon-btn:hover {
+    transform: rotate(90deg);
+}
+
+.icon-btn svg {
+    width: var(--svg-size);
+    height: var(--svg-size);
+    display: block;
+    transition:
+        transform var(--transition-time) ease,
+        stroke var(--transition-time) ease,
+        fill var(--transition-time) ease;
+    transform-origin: center center;
+    stroke: var(--teal-500);
+    fill: none;
+}
+
+.icon-btn:hover svg {
+    fill: var(--teal-800);
+}
+
+.icon-path-line {
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.icon-path-circle {
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.select-emp {
+    background: rgb(255, 255, 255);
+    width: 50%;
+    height: 50%;
+    position: absolute;
+    border-radius: 7px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.ri-close-large-fill {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    z-index: 2;
+}
+
+.ri-close-large-fill:hover {
+    cursor: pointer;
+    color: red;
+}
+
+.div-disp {
+    width: max-content;
+    height: max-content;
+    background-color: rgb(22, 20, 20);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 3px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    transition: all 0.4s ease;
+    border: solid transparent 1px;
+}
+.div-disp:hover {
+    cursor: pointer;
+    background: rgb(255, 255, 255);
+    transform: scale(1.1);
+    border: solid rgb(0, 0, 0) 1px;
+}
+.div-em-room{
+    display: flex;
+    height: max-content;
+    width: max-content;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    border: solid 1px rgb(221, 221, 221);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    margin: 4px;
+    transition: all 0.3s ease;
+}
+.div-em-room:hover{
+    transform: scale(1.05);
+}
+
+
+.blur {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 999;
+    transition: 0.25s ease;
+    display: none;
+}
+.div-info{
+    width: 25%;
+    height: 90%;
+    background-color: rgb(255, 118, 118);
+    border-radius: 10px;
+    position: absolute;
+    left: 15px;
+    top: 10px;
+}
