@@ -8,6 +8,7 @@ const addExp = document.getElementById("add-exp")
 const save = document.getElementById("save")
 const addEmpZone = document.querySelectorAll(".icon-btn")
 const salleEmploye = document.querySelectorAll(".salle-employe")
+const divEmRoom = document.querySelectorAll(".div-em-room")
 
 
 const button = document.createElement('i')
@@ -52,15 +53,36 @@ function createFormExp() {
     position.id = "position"
     position.type = "text"
     position.placeholder = "Position"
-    const period = document.createElement("input")
-    period.classList = "form-input"
-    period.id = "period"
-    period.type = "text"
-    period.placeholder = "Period"
+    const startDate = document.createElement("input")
+    startDate.classList = "form-input"
+    startDate.id = "period"
+    startDate.type = "date"
+    const endDate = document.createElement("input")
+    endDate.classList = "form-input"
+    endDate.id = "period2"
+    endDate.type = "date"
+
+    startDate.addEventListener("change", () => {
+        endDate.min = startDate.value;
+
+        if (endDate.value < startDate.value) {
+            endDate.value = startDate.value;
+        }
+    });
+
+    endDate.addEventListener("change", () => {
+        startDate.max = endDate.value;
+
+        if (startDate.value > endDate.value) {
+            startDate.value = endDate.value;
+        }
+    });
+
     divFormExp.appendChild(closeFormExp)
     divFormExp.appendChild(entrepriseNom)
     divFormExp.appendChild(position)
-    divFormExp.appendChild(period)
+    divFormExp.appendChild(startDate)
+    divFormExp.appendChild(endDate)
     formExp.appendChild(divFormExp)
 
 }
@@ -70,8 +92,9 @@ function getExp() {
     divFormExp.forEach(block => {
         const entreprise = block.querySelector("#entreprise").value
         const position = block.querySelector("#position").value
-        const period = block.querySelector("#period").value
-        experiences.push({ Entreprise: entreprise, Position: position, Period: period })
+        const startDate = block.querySelector("#period").value
+        const endDate = block.querySelector("#period2").value
+        experiences.push({ Entreprise: entreprise, Position: position, StartDate: startDate, EndDate: endDate })
     })
     return experiences
 }
@@ -91,7 +114,18 @@ function stockExp() {
     }
     allEmploye.push(employe)
 }
+const photoInput = document.getElementById("photo")
+const previewImg = document.getElementById("previewImg")
 
+photoInput.addEventListener("input", e => {
+    const url = photoInput.value.trim();
+
+    if (url === "") {
+        previewImg.src = "https://i.pinimg.com/736x/6f/a3/6a/6fa36aa2c367da06b2a4c8ae1cf9ee02.jpg";
+    } else {
+        previewImg.src = url;
+    }
+});
 addEmpZone.forEach(select => {
     select.addEventListener("click", e => {
         blur1.style.display = "flex"
@@ -103,257 +137,290 @@ addEmpZone.forEach(select => {
 createEmploye()
 function createEmploye() {
     sidebarBody.innerHTML = ''
-    const unsEmp = allEmploye.filter(e => e.zone === null);
+    const unsEmp = allEmploye.filter(e => e.zone === null)
 
     if (unsEmp.length === 0) {
-        const p = document.createElement("p");
-        p.textContent = "Aucun employé non assigné";
-        p.style.color = "#c6c6c6ff";
-        sidebarBody.appendChild(p);
-        return;
+        const p = document.createElement("p")
+        p.textContent = "Aucun employé non assigné"
+        p.style.color = "#c6c6c6ff"
+        sidebarBody.appendChild(p)
+        return
     }
 
     unsEmp.forEach(divEm => {
-        const div = document.createElement("div");
-        div.className = "div-em";
-        div.dataset.empId = divEm.id;
+        const div = document.createElement("div")
+        div.className = "div-em"
+        div.dataset.empId = divEm.id
         console.log(div.dataset.empId)
-        const img = document.createElement("img");
-        img.src = divEm.photo;
-        img.className = "img-em";
+        const img = document.createElement("img")
+        img.src = divEm.photo
+        img.className = "img-em"
 
-        const divIn = document.createElement("div");
-        divIn.className = "div-In";
+        const divIn = document.createElement("div")
+        divIn.className = "div-In"
 
-        const pNom = document.createElement("p");
-        pNom.className = "p-em";
-        pNom.textContent = divEm.nom;
+        const pNom = document.createElement("p")
+        pNom.className = "p-em"
+        pNom.textContent = divEm.nom
 
-        const prole = document.createElement("p");
-        prole.className = "p-role";
-        prole.textContent = divEm.role;
+        const prole = document.createElement("p")
+        prole.className = "p-role"
+        prole.textContent = divEm.role
 
-        const deleteEmp = document.createElement("i");
-        deleteEmp.className = "ri-close-circle-line";
+        const deleteEmp = document.createElement("i")
+        deleteEmp.className = "ri-close-circle-line"
         deleteEmp.addEventListener("click", () => {
-            const idIndex = allEmploye.findIndex(emp => emp.id === divEm.id);
-            allEmploye.splice(idIndex, 1);
-            createEmploye();
-            removeEmployeeFromAllRooms(divEm.id);
+            const idIndex = allEmploye.findIndex(emp => emp.id === divEm.id)
+            allEmploye.splice(idIndex, 1)
+            createEmploye()
+            removeEmployeeFromAllRooms(divEm.id)
 
-        });
+        })
 
-        div.appendChild(img);
-        divIn.appendChild(pNom);
-        divIn.appendChild(prole);
-        div.appendChild(divIn);
-        div.appendChild(deleteEmp);
+        div.appendChild(img)
+        divIn.appendChild(pNom)
+        divIn.appendChild(prole)
+        div.appendChild(divIn)
+        div.appendChild(deleteEmp)
 
-        sidebarBody.appendChild(div);
-    });
+        sidebarBody.appendChild(div)
+    })
 }
+// function displayAllInfos() {
+//     const divInfoDisplay = document.querySelectorAll(".div-info")
+//     console.log("divInfoDisplay", divInfoDisplay)
+//     divEmRoom.forEach(btn => {
+//         btn.addEventListener("mouseenter", e => {
+//             divInfoDisplay.forEach(div => {
+//                 div.style.display = "flex";
+//             });
+//         });
+
+//         btn.addEventListener("mouseleave", e => {
+//             divInfoDisplay.forEach(div => {
+//                 div.style.display = "none";
+//             });
+//         });
+//     });
+// }
 
 function getRoomContainer(roomName) {
     const btn = document.querySelector(`.icon-btn[data-salle="${roomName}"]`);
-    if (!btn) return null;
-    const inside = btn.closest(".salle-inside");
-    if (!inside) return null;
+    const inside = btn.parentElement;
     return inside.querySelector(".salle-employe");
 }
 
 function insertEmployeeToRoom(employee, roomName) {
-    const roomBody = getRoomContainer(roomName);
-    if (!roomBody) return;
-    const exists = roomBody.querySelector(`.div-em[data-emp-id="${employee.id}"], .div-em[data-empid="${employee.id}"], .div-em[data-empId="${employee.id}"]`);
-    if (exists) return;
+    const roomBody = getRoomContainer(roomName)
+    const exists = roomBody.querySelector(`.div-em-room[data-emp-id="${employee.id}"]`)
+    if (exists) return
 
-    const div = document.createElement("div");
-    div.className = "div-em-room";
-    div.dataset.empId = employee.id;
+    const div = document.createElement("div")
+    div.className = "div-em-room"
+    div.dataset.empId = employee.id
 
-    const img = document.createElement("img");
-    img.src = employee.photo;
-    img.className = "img-em";
+    const img = document.createElement("img")
+    img.src = employee.photo
+    img.className = "img-em"
 
     const divInfo = document.createElement("div")
     divInfo.classList = "div-info"
 
-    const removeFromRoom = document.createElement("i");
-    removeFromRoom.className = "ri-delete-bin-line";
-    removeFromRoom.style.cursor = "pointer";
+    const removeFromRoom = document.createElement("i")
+    removeFromRoom.className = "ri-delete-bin-line"
+    removeFromRoom.style.cursor = "pointer"
     removeFromRoom.addEventListener("click", () => {
-        const realEmp = allEmploye.find(e => e.id === employee.id);
+        const realEmp = allEmploye.find(e => e.id === employee.id)
         if (realEmp) {
-            realEmp.zone = null;
-            div.remove();
-            createEmploye();
+            realEmp.zone = null
+            div.remove()
+            createEmploye()
         }
-    });
+    })
 
-    div.appendChild(img);
-    div.appendChild(removeFromRoom);
+    div.appendChild(img)
+    div.appendChild(removeFromRoom)
 
-    roomBody.appendChild(divInfo);
-    roomBody.appendChild(div);
+    roomBody.appendChild(divInfo)
+    roomBody.appendChild(div)
     renderAllInfos(employee, divInfo)
 }
 
 function renderAssignedToRooms() {
     allEmploye.forEach(e => {
-        if (e.zone) insertEmployeeToRoom(e, e.zone);
-    });
+        if (e.zone) insertEmployeeToRoom(e, e.zone)
+    })
 }
 function renderAllInfos(divEm, divInfo) {
-    const img = document.createElement("img");
-    img.src = divEm.photo;
-    img.className = "img-em";
+    const img = document.createElement("img")
+    img.src = divEm.photo
+    img.className = "img-display-after-hover"
 
-    const divIn = document.createElement("div");
-    divIn.className = "div-In";
-    const divExp = document.createElement("div");
-    divExp.className = "div-In";
+    const divIn = document.createElement("div")
+    divIn.className = "div-In"
+    const divExp = document.createElement("div")
+    divExp.className = "div-In"
 
-    const pNom = document.createElement("p");
-    pNom.className = "p-em";
-    pNom.textContent = divEm.nom;
+    const pNom = document.createElement("p")
+    pNom.className = "display-after-hover"
+    pNom.textContent = "Nom :" + divEm.nom
 
-    const prole = document.createElement("p");
-    prole.className = "p-role";
-    prole.textContent = divEm.role;
-    const pEmail = document.createElement("p");
-    pEmail.className = "p-role";
-    pEmail.textContent = divEm.email;
-    const pPhone = document.createElement("p");
-    pPhone.className = "p-role";
-    pPhone.textContent = divEm.phone;
-     divEm.exp.forEach(e => {
-        const entreprise = document.createElement("p");
-        entreprise.className = "p-role";
-        entreprise.textContent = e.Entreprise;
-        const position = document.createElement("p");
-        position.className = "p-role";
-        position.textContent = e.Position;
-        const period = document.createElement("p");
-        period.className = "p-role";
-        period.textContent = e.period;
+    const prole = document.createElement("p")
+    prole.className = "display-after-hover"
+    prole.textContent = "Role :" + divEm.role
+    const pEmail = document.createElement("p")
+    pEmail.className = "display-after-hover"
+    pEmail.textContent = "Email :" + divEm.email
+    const pPhone = document.createElement("p")
+    pPhone.className = "display-after-hover"
+    pPhone.textContent = "Phone :" + divEm.phone
+    divEm.exp.forEach(e => {
+        const entreprise = document.createElement("p")
+        entreprise.className = "display-after-hover"
+        entreprise.textContent = "Entreprise :" + e.Entreprise
+        const position = document.createElement("p")
+        position.className = "display-after-hover"
+        position.textContent = "Position :" + e.Position
+        const startDate = document.createElement("P")
+        startDate.className = "display-after-hover"
+        startDate.textContent = "Start date  :" + e.StartDate
+        const endDate = document.createElement("P")
+        endDate.className = "display-after-hover"
+        endDate.textContent = "End date :" + e.EndDate
         divExp.appendChild(entreprise)
         divExp.appendChild(position)
-        divExp.appendChild(period)
+        divExp.appendChild(startDate)
+        divExp.appendChild(endDate)
     })
-    
+
     divInfo.appendChild(img)
     divInfo.appendChild(pNom)
     divInfo.appendChild(prole)
     divInfo.appendChild(pEmail)
     divInfo.appendChild(pPhone)
     divInfo.appendChild(divExp)
-    
+
 }
 function openAssignPopup(roomName) {
-    blur1.innerHTML = '';
-    blur1.style.display = 'flex';
+    blur1.innerHTML = ''
+    blur1.style.display = 'flex'
 
-    const selectEmp = document.createElement("div");
-    selectEmp.className = "select-emp";
+    const selectEmp = document.createElement("div")
+    selectEmp.className = "select-emp"
 
-    const closeBtn = button.cloneNode(true);
-    closeBtn.addEventListener("click", remDsp);
-    selectEmp.appendChild(closeBtn);
-    const eligible = allEmploye.filter(user => user.zone === null && zoneAcc[roomName].roles?.includes(user.role));
+    const closeBtn = button.cloneNode(true)
+    closeBtn.addEventListener("click", remDsp)
+    selectEmp.appendChild(closeBtn)
+    const eligible = allEmploye.filter(user => user.zone === null && zoneAcc[roomName].roles?.includes(user.role))
 
     if (!eligible.length) {
-        const p = document.createElement("p");
-        p.className = "p-vide";
-        p.textContent = " Aucun employé disponible pour cette salle";
-        const divDisp = document.createElement("div");
-        divDisp.className = "div-dis";
-        divDisp.appendChild(p);
-        selectEmp.appendChild(divDisp);
-        blur1.appendChild(selectEmp);
-        return;
+        const p = document.createElement("p")
+        p.className = "p-vide"
+        p.textContent = " Aucun employé disponible pour cette salle"
+        const divDisp = document.createElement("div")
+        divDisp.className = "div-dis"
+        divDisp.appendChild(p)
+        selectEmp.appendChild(divDisp)
+        blur1.appendChild(selectEmp)
+        return
     }
 
     eligible.forEach(emp => {
-        const divDisp = document.createElement("div");
-        divDisp.className = "div-disp";
-        divDisp.dataset.empId = emp.id;
+        const divDisp = document.createElement("div")
+        divDisp.className = "div-disp"
+        divDisp.dataset.empId = emp.id
 
-        const img = document.createElement("img");
-        img.src = emp.photo;
-        img.className = "img-em";
+        const img = document.createElement("img")
+        img.src = emp.photo
+        img.className = "img-em"
 
-        const pNom = document.createElement("p");
-        pNom.className = "p-em2";
-        pNom.textContent = emp.nom;
+        const pNom = document.createElement("p")
+        pNom.className = "p-em2"
+        pNom.textContent = emp.nom
 
-        const prole = document.createElement("p");
-        prole.className = "p-role2";
-        prole.textContent = emp.role;
+        const prole = document.createElement("p")
+        prole.className = "p-role2"
+        prole.textContent = emp.role
 
-        divDisp.appendChild(img);
-        divDisp.appendChild(pNom);
-        divDisp.appendChild(prole);
-        selectEmp.appendChild(divDisp);
+        divDisp.appendChild(img)
+        divDisp.appendChild(pNom)
+        divDisp.appendChild(prole)
+        selectEmp.appendChild(divDisp)
         divDisp.addEventListener("click", () => {
-            const realEmp = allEmploye.find(e => e.id === emp.id);
-            if (!realEmp) return;
-            if (realEmp.zone !== null) return;
+            const realEmp = allEmploye.find(e => e.id === emp.id)
+            if (!realEmp) return
+            if (realEmp.zone !== null) return
+            const roomBody = getRoomContainer(roomName)
+            const currentCount = roomBody?.querySelectorAll(".div-em-room").length || 0
+            const maxCap = zoneAcc[roomName].capacity
+            if (currentCount >= maxCap) {
+                const fullDiv = document.createElement("div")
+                fullDiv.className = "select-emp"
 
-            realEmp.zone = roomName;
-            divDisp.remove();
-            createEmploye();
-            insertEmployeeToRoom(realEmp, roomName);
-        });
-    });
+                const p = document.createElement("p")
+                p.className = "p-vide"
+                p.textContent = `Capacité maximale atteinte (${maxCap})`
 
-    blur1.appendChild(selectEmp);
+                fullDiv.appendChild(p)
+                blur1.appendChild(fullDiv)
+                return
+            }
+
+            realEmp.zone = roomName
+            divDisp.remove()
+            createEmploye()
+            insertEmployeeToRoom(realEmp, roomName)
+        })
+    })
+
+    blur1.appendChild(selectEmp)
 }
 save.addEventListener("click", event => {
-    event.preventDefault();
+    event.preventDefault()
+    const nom = document.getElementById("nom").value.trim()
+    const role = document.getElementById("role").value
+    const phone = document.getElementById("phone").value.trim()
+    const email = document.getElementById("email").value.trim()
 
-    const nom = document.getElementById("nom").value.trim();
-    const role = document.getElementById("role").value;
-    const phone = document.getElementById("phone").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const nameReg = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,30}$/
+    const phoneReg = /^(06|07)[0-9]{8}$/
+    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    let errors = []
 
-    const nameReg = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,30}$/;
-    const phoneReg = /^(06|07)[0-9]{8}$/;
-    const emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    let errors = [];
-
-    if (!nameReg.test(nom)) errors.push("Le nom est invalide !");
-    if (!role) errors.push("Veuillez choisir un rôle !");
-    if (!phoneReg.test(phone)) errors.push("Le numéro de téléphone est invalide !");
-    if (!emailReg.test(email)) errors.push("L'email est invalide !");
+    if (!nameReg.test(nom)) errors.push("Le nom est invalide !")
+    if (!role) errors.push("Veuillez choisir un rôle !")
+    if (!phoneReg.test(phone)) errors.push("Le numéro de téléphone est invalide !")
+    if (!emailReg.test(email)) errors.push("L'email est invalide !")
     if (errors.length > 0) {
-        alert(errors.join("\n"));
-        return;
+        alert(errors.join("\n"))
+        return
     }
 
-    stockExp();
-    createEmploye();
-    renderAssignedToRooms();
-    const formIn = document.querySelector('.form-in');
-    formIn.reset();
-    document.querySelectorAll('.divFormExp').forEach(d => d.remove());
+    stockExp()
+    createEmploye()
+    renderAssignedToRooms()
+    const formIn = document.querySelector('.form-in')
+    formIn.reset()
+    document.querySelectorAll('.divFormExp').forEach(d => d.remove())
 
-    remForm();
-});
+    remForm()
+    console.log(allEmploye)
+})
 
-btnAddForm.addEventListener("click", addForm);
-btnRemForm.addEventListener("click", remForm);
-addExp.addEventListener("click", createFormExp);
+btnAddForm.addEventListener("click", addForm)
+btnRemForm.addEventListener("click", remForm)
+addExp.addEventListener("click", createFormExp)
 
 addEmpZone.forEach(btn => {
     btn.addEventListener("click", (e) => {
-        const roomName = btn.dataset.salle;
-        openAssignPopup(roomName);
-    });
-});
+        const roomName = btn.dataset.salle
+        openAssignPopup(roomName)
+    })
+})
 
 blur1.addEventListener("click", (e) => {
-    if (e.target === blur1) remDsp();
-});
+    if (e.target === blur1) remDsp()
+})
 
-createEmploye();
-renderAssignedToRooms();
+createEmploye()
+renderAssignedToRooms()
