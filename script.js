@@ -22,12 +22,12 @@ button.className = 'ri-close-large-fill'
 
 let allEmploye = []
 const zoneAcc = {
-    reception: { roles: ["receptionniste", "manager", "nettoyage"], capacity: 1 },
-    conferance: { roles: ["manager", "nettoyage"], capacity: 3 },
-    serveurs: { roles: ["technicien IT", "manager", "nettoyage"], capacity: 4 },
+    reception: { roles: ["receptionniste", "manager", "nettoyage"], capacity: 2 },
+    conferance: { roles: ["manager", "nettoyage", "receptionniste", "technicien IT", "agent De Securite","autres Roles"], capacity: 3 },
+    serveurs: { roles: ["technicien IT", "manager", "nettoyage"], capacity: 1 },
     securite: { roles: ["agent De Securite", "manager", "nettoyage"], capacity: 2 },
-    archives: { roles: ["manager"], capacity: 1 },
-    personnel: { roles: ["manager", "nettoyage", "receptionniste", "technicien IT", "agent De Securite"], capacity: 10 }
+    archives: { roles: ["manager", "receptionniste", "technicien IT", "agent De Securite","autres Roles"], capacity: 1 },
+    personnel: { roles: ["manager", "nettoyage", "receptionniste", "technicien IT", "agent De Securite","autres Roles"], capacity: 10 }
 }
 function addForm() {
     form.style.display = "flex"
@@ -133,8 +133,6 @@ photoInput.addEventListener("input", e => {
 addEmpZone.forEach(select => {
     select.addEventListener("click", e => {
         blur1.style.display = "flex"
-        console.log(e)
-        // console.log(select)
     })
 
 })
@@ -177,7 +175,6 @@ function createEmploye() {
             const idIndex = allEmploye.findIndex(emp => emp.id === divEm.id)
             allEmploye.splice(idIndex, 1)
             createEmploye()
-            removeEmployeeFromAllRooms(divEm.id)
 
         })
 
@@ -191,8 +188,8 @@ function createEmploye() {
     })
 }
 function displayAllInfos() {
-    const divEmRoomNodes = document.querySelectorAll('.div-em-room')
-    divEmRoomNodes.forEach(btn => {
+    const divEmR = document.querySelectorAll('.div-em-room')
+    divEmR.forEach(btn => {
         const id = btn.dataset.empId
         const info = document.querySelector(`.div-info[data-emp-id="${id}"]`)
         if (!info) return
@@ -382,9 +379,6 @@ function openAssignPopup(roomName) {
     })
 
     blur1.appendChild(selectEmp)
-}
-function redColorEmpty(){
-
 }
 save.addEventListener("click", event => {
     event.preventDefault()

@@ -763,6 +763,18 @@ body {
 }
 
 
+@media  (max-width: 531px) {
+    #section {
+    height: 177vh;
+}
+   .zones {
+    transform: rotate(90deg);
+        height: 41%;
+    margin-top: 86px;
+}
+
+
+}
 @media  (min-width: 768px) and (max-width: 1023px) {
     :root {
         --btn-size: 48px;
@@ -771,13 +783,19 @@ body {
 
     #section {
         flex-direction: column;
-        height: auto;
+        overflow-y: auto;
     }
 
     #sidebar {
         height: auto;
     }
+     .sidebar-head {
+        margin-top: 10px;
+    }
 
+    #sidebar-body {
+        margin: 20px 0px;
+    }
     #plan {
         width: 100%;
     }
@@ -797,6 +815,4 @@ body {
     #section {
         flex-direction: row;
     }
-
-    .zones {}
 }
