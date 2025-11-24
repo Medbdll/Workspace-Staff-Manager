@@ -780,7 +780,9 @@ body {
         --btn-size: 48px;
         --svg-size: 36px;
     }
-
+    .form{
+        height: 90%;
+    }
     #section {
         flex-direction: column;
         overflow-y: auto;
@@ -811,7 +813,9 @@ body {
         --btn-size: 56px;
         --svg-size: 40px;
     }
-
+     .form{
+        height: 90%;
+    }
     #section {
         flex-direction: row;
     }
