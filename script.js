@@ -6,6 +6,10 @@ const btnRemForm = document.getElementById("ri-close-line")
 const formExp = document.getElementById("form-exp")
 const addExp = document.getElementById("add-exp")
 const save = document.getElementById("save")
+const sdsv = document.getElementById("salle-de-serveurs")
+const sds = document.getElementById("salle-de-securite")
+const sdr = document.getElementById("salle-de-reception")
+const sda = document.getElementById("salle-de-archives")
 const addEmpZone = document.querySelectorAll(".icon-btn")
 const salleEmploye = document.querySelectorAll(".salle-employe")
 const divEmRoom = document.querySelectorAll(".div-em-room")
@@ -18,7 +22,7 @@ button.className = 'ri-close-large-fill'
 
 let allEmploye = []
 const zoneAcc = {
-    reception: { roles: ["receptionniste", "manager", "nettoyage"], capacity: 3 },
+    reception: { roles: ["receptionniste", "manager", "nettoyage"], capacity: 1 },
     conferance: { roles: ["manager", "nettoyage"], capacity: 3 },
     serveurs: { roles: ["technicien IT", "manager", "nettoyage"], capacity: 4 },
     securite: { roles: ["agent De Securite", "manager", "nettoyage"], capacity: 2 },
@@ -186,23 +190,20 @@ function createEmploye() {
         sidebarBody.appendChild(div)
     })
 }
-// function displayAllInfos() {
-//     const divInfoDisplay = document.querySelectorAll(".div-info")
-//     console.log("divInfoDisplay", divInfoDisplay)
-//     divEmRoom.forEach(btn => {
-//         btn.addEventListener("mouseenter", e => {
-//             divInfoDisplay.forEach(div => {
-//                 div.style.display = "flex";
-//             });
-//         });
-
-//         btn.addEventListener("mouseleave", e => {
-//             divInfoDisplay.forEach(div => {
-//                 div.style.display = "none";
-//             });
-//         });
-//     });
-// }
+function displayAllInfos() {
+    const divEmRoomNodes = document.querySelectorAll('.div-em-room')
+    divEmRoomNodes.forEach(btn => {
+        const id = btn.dataset.empId
+        const info = document.querySelector(`.div-info[data-emp-id="${id}"]`)
+        if (!info) return
+        btn.addEventListener('mouseenter', () => {
+            info.style.display = 'flex'
+        })
+        btn.addEventListener('mouseleave', () => {
+            info.style.display = 'none'
+        })
+    })
+}
 
 function getRoomContainer(roomName) {
     const btn = document.querySelector(`.icon-btn[data-salle="${roomName}"]`);
@@ -225,6 +226,8 @@ function insertEmployeeToRoom(employee, roomName) {
 
     const divInfo = document.createElement("div")
     divInfo.classList = "div-info"
+    divInfo.style.display = "none"
+    divInfo.dataset.empId = employee.id
 
     const removeFromRoom = document.createElement("i")
     removeFromRoom.className = "ri-delete-bin-line"
@@ -234,16 +237,22 @@ function insertEmployeeToRoom(employee, roomName) {
         if (realEmp) {
             realEmp.zone = null
             div.remove()
+            if (divInfo && divInfo.parentElement) divInfo.remove()
             createEmploye()
         }
     })
 
     div.appendChild(img)
     div.appendChild(removeFromRoom)
-
     roomBody.appendChild(divInfo)
     roomBody.appendChild(div)
     renderAllInfos(employee, divInfo)
+    div.addEventListener("mouseenter", () => {
+        divInfo.style.display = "flex"
+    })
+    div.addEventListener("mouseleave", () => {
+        divInfo.style.display = "none"
+    })
 }
 
 function renderAssignedToRooms() {
@@ -365,7 +374,6 @@ function openAssignPopup(roomName) {
                 blur1.appendChild(fullDiv)
                 return
             }
-
             realEmp.zone = roomName
             divDisp.remove()
             createEmploye()
@@ -374,6 +382,9 @@ function openAssignPopup(roomName) {
     })
 
     blur1.appendChild(selectEmp)
+}
+function redColorEmpty(){
+
 }
 save.addEventListener("click", event => {
     event.preventDefault()

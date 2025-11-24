@@ -15,8 +15,8 @@ body {
 :root {
     --teal-500: oklch(73.467% 0.15148 241.457);
     --teal-800: oklch(0% 0 0);
-    --btn-size: 64px;
-    --svg-size: 50px;
+    --btn-size: 40px;
+    --svg-size: 40px;
     --transition-time: 300ms;
 }
 
@@ -126,7 +126,7 @@ body {
 
 /* form to adding new worker information */
 .formblur {
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     display: flex;
@@ -332,16 +332,14 @@ body {
 
 .zones {
     border-radius: 10px;
-    width: 80%;
     height: 80%;
     grid-row: 2/7;
     display: grid;
 }
 
 .row2 {
-    height: 50%;
-    width: 50%;
     display: grid;
+    height: max-content;
     grid-template-columns: repeat(4, auto);
     grid-template-rows: repeat(3, auto);
 }
@@ -484,8 +482,6 @@ body {
 }
 
 .icon-btn svg {
-    width: var(--svg-size);
-    height: var(--svg-size);
     display: block;
     transition:
         transform var(--transition-time) ease,
@@ -615,4 +611,192 @@ body {
 .display-after-hover {
     padding: 4px 40px;
     color: #ddd;
+}
+
+
+@media (max-width: 767px) {
+    :root {
+        --btn-size: 48px;
+        --svg-size: 36px;
+    }
+
+    body {
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    #section {
+        flex-direction: column;
+    }
+
+    #sidebar {
+
+        padding: 16px;
+        height: auto;
+    }
+
+    .sidebar-head {
+        margin-top: 10px;
+    }
+
+    #sidebar-body {
+        margin: 20px 0px;
+    }
+
+    #plan {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .plan-h1 {
+        width: 100%;
+        justify-content: center;
+        padding: 30px 0px;
+        height: max-content;
+    }
+
+    #salle-de-conferance {
+        height: 100px;
+        width: 198px;
+    }
+
+    .salle1,
+    .salle3 {
+        height: 100px;
+    }
+
+    #salle-de-serveurs {
+        height: 100px;
+        width: 112px;
+    }
+
+    .salle-employe {
+        height: auto;
+        gap: 6px;
+    }
+
+    #salle-de-securite {
+        height: 100px;
+        width: 110px;
+    }
+
+    #salle-de-reception {
+        width: 198px;
+        height: 191px;
+    }
+
+    #salle1,
+    #salle3 {
+        height: 100px;
+        width: 76px;
+    }
+
+    #salle-de-personnel {
+        height: 99px;
+        width: 112px;
+    }
+
+    #salle-de-archives {
+        height: 99px;
+        width: 110px;
+    }
+
+    #salle2 {
+        height: 91px;
+        width: 298px;
+    }
+
+    .salle2 {
+        height: 93px;
+        width: 298px;
+    }
+
+    .salle-title {
+        font-size: 12px;
+        padding-top: 7px;
+    }
+
+    .icon-btn {
+        width: 24px;
+        height: 24px;
+    }
+
+    .img-em {
+        width: 30px;
+        height: 30px;
+    }
+
+    .p-em2 {
+        font-size: x-small;
+    }
+
+    .div-em-room {
+        padding: 2px;
+    }
+
+    .div-info {
+        width: 94%;
+        height: 33%;
+        left: 20px;
+        top: 10px;
+        z-index: 1;
+    }
+
+    .img-display-after-hover {
+        width: 100px;
+        margin: 30px;
+    }
+
+    .form {
+        height: 90%;
+    }
+
+    .form h1 {
+        font-size: 23px;
+    }
+
+    .form-in {
+        width: 81%;
+    }
+}
+
+
+@media  (min-width: 768px) and (max-width: 1023px) {
+    :root {
+        --btn-size: 48px;
+        --svg-size: 36px;
+    }
+
+    #section {
+        flex-direction: column;
+        height: auto;
+    }
+
+    #sidebar {
+        height: auto;
+    }
+
+    #plan {
+        width: 100%;
+    }
+
+    .div-info {
+        position: relative;
+        width: 90%;
+        left: 0;
+    }
+}
+@media  (min-width: 1024px) and (max-width: 1279px) {
+    :root {
+        --btn-size: 56px;
+        --svg-size: 40px;
+    }
+
+    #section {
+        flex-direction: row;
+    }
+
+    .zones {}
 }
